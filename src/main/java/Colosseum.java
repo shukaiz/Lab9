@@ -103,7 +103,54 @@ public class Colosseum {
      *         <p>
      */
     public static Pokemon buildPokemon() {
-        Pokemon returnPokemon = null;
+
+        Pokemon returnPokemon = new Pokemon();
+
+        do {
+            printTypeMenu();
+            int pokeType = myScan.nextInt();
+
+            if (pokeType == 1) {
+                returnPokemon.pokeType = Pokemon.PokemonType.ELECTRIC;
+                break;
+            } else if (pokeType == 2) {
+                returnPokemon.pokeType = Pokemon.PokemonType.FIRE;
+                break;
+            } else if (pokeType == 3) {
+                returnPokemon.pokeType = Pokemon.PokemonType.WATER;
+                break;
+            } else {
+                System.out.println("Sorry, you must pick either 1, 2, or 3.");
+            }
+        } while (true);
+
+        System.out.print("Please name your Pokemon: ");
+        returnPokemon.setName(myScan.next());
+
+        System.out.print("How many hit points will it have? (1-50): ");
+        int hitPoint;
+        do {
+            hitPoint = myScan.nextInt();
+            if (hitPoint >= 1 && hitPoint <= 50) {
+                returnPokemon.setHitPoints(hitPoint);
+                break;
+            } else {
+                System.out.print("Sorry. Hit points must be between 1 and 50: ");
+            }
+        } while (true);
+
+        System.out.print("Enter your defense level (1-" + (50 - hitPoint) +  "): ");
+        do {
+            int defenceLevel = myScan.nextInt();
+            if (defenceLevel >= 1 && defenceLevel <= (50 - hitPoint)) {
+                returnPokemon.setDefenseLevel(defenceLevel);
+                break;
+            } else {
+                System.out.print("Sorry. Hit points must be between 1 and "+ (50 - hitPoint) +": ");
+            }
+        } while (true);
+
+
         return returnPokemon;
     }
 
